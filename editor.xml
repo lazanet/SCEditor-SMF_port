@@ -25,8 +25,16 @@
 			<add><![CDATA[function smc_SmileyBox(oOptions)
 { return;
 			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[smc_Editor.prototype.init = function()
+{]]></search>
+			<add><![CDATA[smc_Editor.prototype.init = function()
+{ return;
+			]]></add>
 		</operation>		
 	</file>
+
 	<file name="$sourcedir/Subs-Editor.php">
 		<operation>
 			<search position="replace"><![CDATA[<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/editor.js?fin20"></script>]]></search>
@@ -46,7 +54,7 @@
 							height: "50%",
 							fonts: "sans-serif",
 							style: "' . $settings['default_theme_url'] . '/editor/themes/default.min.css",
-							emoticons: "' . $settings['default_theme_url'] . '/editor/",
+							emoticonsRoot: "' . $settings['default_theme_url'] . '/editor/",
 							resizeWidth: false,
 						});
 					});
@@ -74,7 +82,7 @@
 							height: "50%",
 							fonts: "sans-serif",
 							style: "' . $settings['default_theme_url'] . '/editor/themes/default.min.css",
-							emoticons: "' . $settings['default_theme_url'] . '/editor/",
+							emoticonsRoot: "' . $settings['default_theme_url'] . '/editor/",
 							resizeWidth: false,
 						});
 					});
