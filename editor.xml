@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>lazanet:SCEditor_(SMF_port)</id>
+	<name>SCEditor v2.1.2 (SMF port)</name>
+	<version>1.0</version>
+	<type>modification</type>
+	
+	<file name="$themedir/scripts/editor.js">
+		<operation>
+			<search position="replace"><![CDATA[this.bRichTextEnabled = 'bWysiwyg' in this.opt && this.opt.bWysiwyg;]]></search>
+			<add><![CDATA[// Smf Mod Editor: Add last condition in order to disable WYSIWYG
+	this.bRichTextEnabled = 'bWysiwyg' in this.opt && this.opt.bWysiwyg && false;]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[function smc_BBCButtonBox(oOptions)
+{]]></search>
+			<add><![CDATA[function smc_BBCButtonBox(oOptions)
+{ return;
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[function smc_SmileyBox(oOptions)
+{]]></search>
+			<add><![CDATA[function smc_SmileyBox(oOptions)
+{ return;
+			]]></add>
+		</operation>		
+	</file>
+	<file name="$sourcedir/Subs-Editor.php">
+		<operation>
+			<search position="replace"><![CDATA[<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/editor.js?fin20"></script>]]></search>
+			<add><![CDATA[
+			<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/editor.js?fin20"></script>
+
+			<link rel="stylesheet" href="' . $settings['default_theme_url'] . '/editor/themes/default.min.css"/>
+			<script type="text/javascript" src="' . $settings['default_theme_url'] . '/editor/sceditor.min.js"></script>
+			<script type="text/javascript" src="' . $settings['default_theme_url'] . '/editor/formats/bbcode.js"></script>
+			<script>
+				document.addEventListener("DOMContentLoaded", function(event) { 
+					let editorList = document.querySelectorAll("textarea.editor, .quickReplyContent textarea");
+					editorList.forEach( e => {
+						sceditor.create(e, {
+							format: "bbcode",
+							width: "100%",
+							height: "50%",
+							fonts: "sans-serif",
+							style: "' . $settings['default_theme_url'] . '/editor/themes/default.min.css",
+							emoticons: "' . $settings['default_theme_url'] . '/editor/",
+							resizeWidth: false,
+						});
+					});
+				});
+			</script>
+			]]></add>
+		</operation>
+	</file>
+	<file name="$themedir/Display.template.php">
+		<operation>
+			<search position="replace"><![CDATA[<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/topic.js"></script>]]></search>
+			<add><![CDATA[
+			<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/topic.js"></script>
+
+			<link rel="stylesheet" href="' . $settings['default_theme_url'] . '/editor/themes/default.min.css"/>
+			<script type="text/javascript" src="' . $settings['default_theme_url'] . '/editor/sceditor.min.js"></script>
+			<script type="text/javascript" src="' . $settings['default_theme_url'] . '/editor/formats/bbcode.js"></script>
+			<script>
+				document.addEventListener("DOMContentLoaded", function(event) { 
+					let editorList = document.querySelectorAll("textarea.editor, .quickReplyContent textarea");
+					editorList.forEach( e => {
+						sceditor.create(e, {
+							format: "bbcode",
+							width: "100%",
+							height: "50%",
+							fonts: "sans-serif",
+							style: "' . $settings['default_theme_url'] . '/editor/themes/default.min.css",
+							emoticons: "' . $settings['default_theme_url'] . '/editor/",
+							resizeWidth: false,
+						});
+					});
+				});
+			</script>
+			]]></add>
+		</operation>
+	</file>
+	
+</modification>

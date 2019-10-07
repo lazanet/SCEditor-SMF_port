@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>lazanet:SCEditor_(SMF_port)</id>
+	<name>SCEditor v2.1.2 (SMF port)</name>
+	<version>1.0</version>
+	<type>modification</type>
+	
+	<install for="2.0 - 2.0.99">
+		<readme parsebbc="true">readme/readme.txt</readme>
+		<require-dir name="editor" destination="$themedir" />
+		<modification format="xml" type="file">editor.xml</modification>
+		<code>hooks.php</code>
+	</install>
+	
+	<uninstall for="2.0 - 2.0.99">
+		<code>hooks.php</code>
+		<remove-dir name="$themedir/editor" />
+		<modification reverse="true">editor.xml</modification>
+		<redirect url="?action=admin;area=packages;sa=browse" timeout="1000" />
+	</uninstall>
+</package-info>
